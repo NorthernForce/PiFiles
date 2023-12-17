@@ -3,5 +3,13 @@ services:
     build:
       context: docker
     image: ghcr.io/northernforce/pifiles:main
-    command: /bin/bash
+    command: tail -f /dev/null
     working_dir: /workspaces/rosnfr
+    volumes:
+      - .:/workspaces/rosnfr
+  ros2_runtime:
+    image: ghcr.io/northernforce/pifiles:main
+    command: install/setup.bash && ros2 launch nfr_charged_up swervy.launch.py
+    working_dir: /workspaces/rosnfr
+    volumes:
+      - .:/workspaces/rosnfr
