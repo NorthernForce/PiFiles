@@ -2,6 +2,6 @@ services:
   ros2_devel:
     build:
       context: docker
-    image: rosnfr
+    image: ghcr.io/northernforce/pifiles:main
     command: /bin/bash
     working_dir: /workspaces/rosnfr
