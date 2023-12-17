@@ -1,0 +1,7 @@
+services:
+  ros2_devel:
+    build:
+      context: docker
+    image: rosnfr
+    command: /bin/bash
+    working_dir: /workspaces/rosnfr
