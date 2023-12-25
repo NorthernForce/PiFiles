@@ -1,0 +1,16 @@
+{
+	"name": "Existing Docker Compose (Extend)",
+	"dockerComposeFile": [
+		"../docker-compose.yaml"
+	],
+	"service": "ros2_devel",
+	"workspaceFolder": "/workspaces/rosnfr",
+	"remoteUser": "root",
+	"customizations": {
+		"vscode": {
+			"extensions": [
+				"ms-iot.vscode-ros"
+			]
+		}
+	}
+}

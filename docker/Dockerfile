@@ -10,6 +10,20 @@ ENV DEBIAN_FRONTEND=NONINTERACTIVE
 RUN apt update && apt upgrade -y && apt install -y ros-iron-ros-base python3-argcomplete && apt install -y ros-dev-tools
 RUN apt update && apt install -y ros-iron-realsense2-camera ros-iron-apriltag
 RUN apt update && apt install -y ros-iron-apriltag-ros
+RUN apt update && apt install -y ros-iron-image-proc
+RUN apt update && apt install -y ros-iron-navigation2
+RUN apt update && apt install -y python3 python3-pip libssh-dev libprotobuf-dev
+RUN apt update && apt install -y generate-ninja ninja-build
+RUN pip3 install jinja2
+WORKDIR /tmp
+RUN git clone https://github.com/wpilibsuite/allwpilib.git -b v2024.1.1-beta-1
+RUN cd allwpilib && mkdir build && cd build && cmake .. -DWITH_JAVA=OFF -DWITH_WPILIB=OFF -DWITH_EXAMPLES=OFF \
+    -DWITH_TESTS=OFF -DWITH_GUI=OFF -DWITH_SIMULATION_MODULES=OFF -DWITH_JAVA_SOURCE=OFF
+RUN cd allwpilib/build && make -j$(nproc)
+RUN cd allwpilib/build && make install
+RUN rm -rf allwpilib
+RUN apt update && apt install -y nlohmann-json3-dev
+RUN apt update && apt install -y ros-iron-usb-cam
 RUN mkdir -p /workspaces
 COPY scripts/entrypoint.sh /workspaces/entrypoint.sh
 RUN chmod +x /workspaces/entrypoint.sh
