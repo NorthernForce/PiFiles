@@ -9,7 +9,7 @@ services:
       - .:/workspaces/rosnfr
     network_mode: host
     privileged: true
-  ros2_runtime:
+  ros2_swervy:
     image: ghcr.io/northernforce/pifiles:main
     command: ros2 launch nfr_charged_up swervy.launch.py
     working_dir: /workspaces/rosnfr
@@ -17,3 +17,20 @@ services:
       - .:/workspaces/rosnfr
     network_mode: host
     privileged: true
+  ros2_test:
+    image: ghcr.io/northernforce/pifiles:main
+    command: ros2 launch nfr_charged_up test.launch.py
+    working_dir: /workspaces/rosnfr
+    volumes:
+      - .:/workspaces/rosnfr
+    privileged: true
+    networks:
+      network:
+        ipv4_address: 10.1.72.20
+networks:
+  network:
+    driver: bridge
+    ipam:
+      config:
+        - subnet: 10.1.72.0/16
+          gateway: 10.1.72.1
