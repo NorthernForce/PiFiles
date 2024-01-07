@@ -7,6 +7,7 @@
         "/opt/ros/iron/lib/python3.10/site-packages"
     ],
     "files.associations": {
-        "*.inc": "cpp"
+        "*.inc": "cpp",
+        "chrono": "cpp"
     }
 }
