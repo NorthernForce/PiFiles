@@ -24,6 +24,7 @@ RUN cd allwpilib/build && make install
 RUN rm -rf allwpilib
 RUN apt update && apt install -y nlohmann-json3-dev
 RUN apt update && apt install -y ros-iron-usb-cam ros-iron-v4l2-camera
+RUN apt update && apt install -y ros-iron-fuse*
 RUN ldconfig
 RUN mkdir -p /workspaces
 COPY scripts/entrypoint.sh /workspaces/entrypoint.sh

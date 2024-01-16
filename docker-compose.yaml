@@ -28,13 +28,13 @@ services:
     volumes:
       - .:/workspaces/rosnfr
     privileged: true
-    networks:
-      network:
-        ipv4_address: 10.1.72.20
-networks:
-  network:
-    driver: bridge
-    ipam:
-      config:
-        - subnet: 10.1.72.0/16
-          gateway: 10.1.72.2
+    # networks:
+    #   network:
+    #     ipv4_address: 10.1.72.20
+# networks:
+#   network:
+#     driver: bridge
+#     ipam:
+#       config:
+#         - subnet: 10.1.72.0/16
+#           gateway: 10.1.72.2
