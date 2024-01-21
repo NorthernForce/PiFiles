@@ -13,7 +13,8 @@
                 "/usr/include/**",
                 "${workspaceFolder}/install/nfr_msgs/include/nfr_msgs",
                 "/usr/local/include/ntcore",
-                "/usr/local/include/wpiutil"
+                "/usr/local/include/wpiutil",
+                "/usr/include/eigen3"
             ],
             "name": "ROS",
             "intelliSenseMode": "gcc-x64",
