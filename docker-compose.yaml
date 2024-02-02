@@ -10,7 +10,7 @@ services:
       - /tmp/.X11-unix:/tmp/.X11-unix
       - ~/.Xauthority:/root/.Xauthority
     network_mode: host
-    privileged: true
+    # privileged: true
     environment:
       DISPLAY: $DISPLAY
   ros2_swervy:

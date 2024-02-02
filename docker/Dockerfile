@@ -8,6 +8,14 @@ RUN apt update && apt install curl -y && curl -sSL https://raw.githubusercontent
     http://packages.ros.org/ros2/ubuntu $(. /etc/os-release && echo $UBUNTU_CODENAME) main" | tee /etc/apt/sources.list.d/ros2.list > /dev/null
 ENV DEBIAN_FRONTEND=NONINTERACTIVE
 RUN apt update && apt upgrade -y && apt install -y ros-iron-ros-base python3-argcomplete && apt update && apt install -y ros-dev-tools
+WORKDIR /opt/realsense
+COPY scripts/install_realsense_dependencies.sh install_realsense_dependencies.sh
+RUN chmod +x install_realsense_dependencies.sh && ./install_realsense_dependencies.sh
+COPY scripts/build_realsense.sh build_realsense.sh
+RUN chmod +x build_realsense.sh && ./build_realsense.sh -n
+COPY scripts/hotplug-realsense.sh hotplug-realsense.sh
+RUN chmod +x hotplug-realsense.sh
+COPY udev_rules/99-realsense-libusb-custom.rules /etc/udev/rules.d/99-realsense-libusb-custom.rules
 RUN apt update && apt install -y ros-iron-realsense2-camera ros-iron-apriltag
 RUN apt update && apt install -y ros-iron-apriltag-ros
 RUN apt update && apt install -y ros-iron-image-proc
