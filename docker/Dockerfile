@@ -10,8 +10,13 @@ ENV DEBIAN_FRONTEND=NONINTERACTIVE
 RUN apt update && apt upgrade -y && apt install -y ros-iron-ros-base python3-argcomplete && apt update && apt install -y ros-dev-tools
 WORKDIR /opt/realsense
 RUN wget https://github.com/IntelRealSense/librealsense/raw/master/scripts/libuvc_installation.sh && chmod +x libuvc_installation.sh
-RUN ./libuvc_installation.sh
-RUN apt update && apt install -y ros-iron-realsense2-camera ros-iron-apriltag
+RUN apt update && mkdir -p /etc/udev/rules.d/ && ./libuvc_installation.sh
+WORKdir /opt/ros/realsense
+RUN mkdir -p src && cd src && git clone https://github.com/IntelRealSense/realsense-ros
+RUN . /opt/ros/iron/setup.sh && rosdep init && rosdep update && rosdep install --ignore-src --from-paths src -y --skip-keys librealsense2
+RUN . /opt/ros/iron/setup.sh && colcon build --merge-install --install-base /opt/ros/iron
+RUN rm -rf src build log
+RUN apt update && apt install -y ros-iron-apriltag
 RUN apt update && apt install -y ros-iron-apriltag-ros
 RUN apt update && apt install -y ros-iron-image-proc
 RUN apt update && apt install -y ros-iron-navigation2
@@ -28,6 +33,7 @@ RUN rm -rf allwpilib
 RUN apt update && apt install -y nlohmann-json3-dev
 RUN apt update && apt install -y ros-iron-usb-cam ros-iron-v4l2-camera
 RUN apt update && apt install -y ros-iron-fuse*
+RUN ln -s /opt/ros/iron/lib/x86_64-linux-gnu/liburdfdom_model.so.3.0 /opt/ros/iron/lib/liburdfdom_model.so.3.0
 RUN ldconfig
 RUN mkdir -p /workspaces
 COPY scripts/entrypoint.sh /workspaces/entrypoint.sh
