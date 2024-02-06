@@ -14,7 +14,15 @@
                 "${workspaceFolder}/install/nfr_msgs/include/nfr_msgs",
                 "/usr/local/include/ntcore",
                 "/usr/local/include/wpiutil",
-                "/usr/include/eigen3"
+                "/usr/include/eigen3",
+                "/usr/include/torch/csrc/api/include",
+                "/opt/ros/iron/include/message_filters",
+                "/usr/include/opencv4",
+                "/opt/ros/iron/include/apriltag_msgs",
+                "/opt/ros/iron/include/sensor_msgs",
+                "/opt/ros/iron/include/geometry_msgs",
+                "/opt/ros/iron/include/tf2_ros",
+                "/opt/ros/iron/include/tf2_geometry_msgs"
             ],
             "name": "ROS",
             "intelliSenseMode": "gcc-x64",
