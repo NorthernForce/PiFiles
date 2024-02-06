@@ -33,7 +33,8 @@ RUN rm -rf allwpilib
 RUN apt update && apt install -y nlohmann-json3-dev
 RUN apt update && apt install -y ros-iron-usb-cam ros-iron-v4l2-camera
 RUN apt update && apt install -y ros-iron-fuse*
-RUN ln -s /opt/ros/iron/lib/x86_64-linux-gnu/liburdfdom_model.so.3.0 /opt/ros/iron/lib/liburdfdom_model.so.3.0
+# RUN ln -s /opt/ros/iron/lib/x86_64-linux-gnu/liburdfdom_model.so.3.0 /opt/ros/iron/lib/liburdfdom_model.so.3.0
+RUN ln -s /opt/ros/iron/lib/aarch64-linux-gnu/liburdfdom_model.so.3.0 /opt/ros/iron/lib/liburdfdom_model.so.3.0
 RUN ldconfig
 RUN mkdir -p /workspaces
 COPY scripts/entrypoint.sh /workspaces/entrypoint.sh
