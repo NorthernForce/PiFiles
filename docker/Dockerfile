@@ -21,10 +21,10 @@ RUN apt update && apt install -y ros-iron-apriltag-ros
 RUN apt update && apt install -y ros-iron-image-proc
 RUN apt update && apt install -y ros-iron-navigation2
 RUN apt update && apt install -y python3 python3-pip libssh-dev libprotobuf-dev
-RUN apt update && apt install -y generate-ninja ninja-build
+RUN apt update && apt install -y generate-ninja ninja-build protobuf*
 RUN pip3 install jinja2
 WORKDIR /tmp
-RUN git clone https://github.com/wpilibsuite/allwpilib.git -b v2024.1.1-beta-1
+RUN git clone https://github.com/wpilibsuite/allwpilib.git -b v2024.2.1
 RUN cd allwpilib && mkdir build && cd build && cmake .. -DWITH_JAVA=OFF -DWITH_WPILIB=OFF -DWITH_EXAMPLES=OFF \
     -DWITH_TESTS=OFF -DWITH_GUI=OFF -DWITH_SIMULATION_MODULES=OFF -DWITH_JAVA_SOURCE=OFF
 RUN cd allwpilib/build && make -j$(nproc)
@@ -33,7 +33,7 @@ RUN rm -rf allwpilib
 RUN apt update && apt install -y nlohmann-json3-dev
 RUN apt update && apt install -y ros-iron-usb-cam ros-iron-v4l2-camera
 RUN apt update && apt install -y ros-iron-fuse*
-# RUN ln -s /opt/ros/iron/lib/x86_64-linux-gnu/liburdfdom_model.so.3.0 /opt/ros/iron/lib/liburdfdom_model.so.3.0
+#RUN ln -s /opt/ros/iron/lib/x86_64-linux-gnu/liburdfdom_model.so.3.0 /opt/ros/iron/lib/liburdfdom_model.so.3.0
 RUN ln -s /opt/ros/iron/lib/aarch64-linux-gnu/liburdfdom_model.so.3.0 /opt/ros/iron/lib/liburdfdom_model.so.3.0
 RUN ldconfig
 RUN mkdir -p /workspaces
