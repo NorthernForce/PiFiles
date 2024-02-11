@@ -9,10 +9,13 @@ RUN apt update && apt install curl -y && curl -sSL https://raw.githubusercontent
 ENV DEBIAN_FRONTEND=NONINTERACTIVE
 RUN apt update && apt upgrade -y && apt install -y ros-iron-ros-base python3-argcomplete && apt update && apt install -y ros-dev-tools
 WORKDIR /opt/realsense
-RUN wget https://github.com/IntelRealSense/librealsense/raw/master/scripts/libuvc_installation.sh && chmod +x libuvc_installation.sh
-RUN apt update && mkdir -p /etc/udev/rules.d/ && ./libuvc_installation.sh
+RUN git clone https://github.com/IntelRealSense/librealsense -b v2.54.1
+RUN apt update && apt install git cmake libssl-dev freeglut3-dev libusb-1.0-0-dev pkg-config libgtk-3-dev unzip -y
+RUN cd librealsense && mkdir build && cd build && cmake .. -DFORCE_LIBUVC=true -DCMAKE_BUILD_TYPE=release
+RUN cd librealsense/build && make -j6
+RUN cd librealsense/build && make install
 WORKdir /opt/ros/realsense
-RUN mkdir -p src && cd src && git clone https://github.com/IntelRealSense/realsense-ros
+RUN mkdir -p src && cd src && git clone https://github.com/IntelRealSense/realsense-ros -b 4.54.1
 RUN . /opt/ros/iron/setup.sh && rosdep init && rosdep update && rosdep install --ignore-src --from-paths src -y --skip-keys librealsense2
 RUN . /opt/ros/iron/setup.sh && colcon build --merge-install --install-base /opt/ros/iron
 RUN rm -rf src build log
