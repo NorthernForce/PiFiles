@@ -11,7 +11,7 @@ RUN apt update && apt upgrade -y && apt install -y ros-iron-ros-base python3-arg
 WORKDIR /opt/realsense
 RUN git clone https://github.com/IntelRealSense/librealsense -b v2.54.1
 RUN apt update && apt install git cmake libssl-dev freeglut3-dev libusb-1.0-0-dev pkg-config libgtk-3-dev unzip -y
-RUN cd librealsense && mkdir build && cd build && cmake .. -DFORCE_LIBUVC=true -DCMAKE_BUILD_TYPE=release
+RUN cd librealsense && mkdir build && cd build && cmake .. -DFORCE_RSUSB_BACKEND=true -DCMAKE_BUILD_TYPE=release
 RUN cd librealsense/build && make -j6
 RUN cd librealsense/build && make install
 WORKdir /opt/ros/realsense
@@ -36,8 +36,8 @@ RUN rm -rf allwpilib
 RUN apt update && apt install -y nlohmann-json3-dev
 RUN apt update && apt install -y ros-iron-usb-cam ros-iron-v4l2-camera
 RUN apt update && apt install -y ros-iron-fuse*
-#RUN ln -s /opt/ros/iron/lib/x86_64-linux-gnu/liburdfdom_model.so.3.0 /opt/ros/iron/lib/liburdfdom_model.so.3.0
-RUN ln -s /opt/ros/iron/lib/aarch64-linux-gnu/liburdfdom_model.so.3.0 /opt/ros/iron/lib/liburdfdom_model.so.3.0
+RUN ln -s /opt/ros/iron/lib/x86_64-linux-gnu/liburdfdom_model.so.3.0 /opt/ros/iron/lib/liburdfdom_model.so.3.0
+#RUN ln -s /opt/ros/iron/lib/aarch64-linux-gnu/liburdfdom_model.so.3.0 /opt/ros/iron/lib/liburdfdom_model.so.3.0
 RUN ldconfig
 RUN mkdir -p /workspaces
 COPY scripts/entrypoint.sh /workspaces/entrypoint.sh
