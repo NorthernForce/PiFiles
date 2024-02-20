@@ -22,7 +22,11 @@ RUN rm -rf src build log
 RUN apt update && apt install -y ros-rolling-apriltag
 RUN apt update && apt install -y ros-rolling-apriltag-ros
 RUN apt update && apt install -y ros-rolling-image-proc
-RUN apt update && apt install -y ros-rolling-navigation2
+WORKDIR /opt/ros/navigation2
+RUN mkdir -p src && cd src && git clone https://github.com/ros-planning/navigation2.git
+RUN . /opt/ros/rolling/setup.bash && rosdep update && rosdep install --ignore-src --from-paths src -y --rosdistro rolling --skip-keys slam_toolbox
+RUN . /opt/ros/rolling/setup.bash && colcon build --merge-install --install-base /opt/ros/rolling
+RUN rm -rf src build log
 RUN apt update && apt install -y python3 python3-pip libssh-dev libprotobuf-dev
 RUN apt update && apt install -y generate-ninja ninja-build protobuf*
 RUN pip3 install jinja2
