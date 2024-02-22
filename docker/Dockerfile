@@ -24,6 +24,7 @@ RUN apt update && apt install -y ros-rolling-apriltag-ros
 RUN apt update && apt install -y ros-rolling-image-proc
 WORKDIR /opt/ros/navigation2
 RUN mkdir -p src && cd src && git clone https://github.com/ros-planning/navigation2.git
+RUN rm -rf src/navigation2/nav2_bringup src/navigation2/nav2_system_tests
 RUN . /opt/ros/rolling/setup.sh && rosdep update && rosdep install --ignore-src --from-paths src -y --rosdistro rolling --skip-keys slam_toolbox
 RUN . /opt/ros/rolling/setup.sh && colcon build --merge-install --install-base /opt/ros/rolling
 RUN rm -rf src build log
@@ -40,7 +41,7 @@ RUN rm -rf allwpilib
 RUN apt update && apt install -y nlohmann-json3-dev
 RUN apt update && apt install -y ros-rolling-usb-cam ros-rolling-v4l2-camera
 RUN apt update && apt install -y ros-rolling-fuse*
-RUN ln -s /opt/ros/rolling/lib/$(uname -m)-linux-gnu/liburdfdom_model.so.3.0 /opt/ros/rolling/lib/liburdfdom_model.so.3.0
+RUN ln -s /opt/ros/rolling/lib/$(uname -m)-linux-gnu/liburdfdom_model.so.4.0 /opt/ros/rolling/lib/liburdfdom_model.so.4.0
 RUN ldconfig
 RUN mkdir -p /workspaces
 COPY scripts/entrypoint.sh /workspaces/entrypoint.sh

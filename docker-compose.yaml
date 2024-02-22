@@ -21,6 +21,22 @@ services:
       - .:/workspaces/rosnfr
     network_mode: host
     privileged: true
+  ros2_crabby:
+    image: ghcr.io/northernforce/pifiles:main
+    command: ros2 launch nfr_crescendo crabby.launch.py
+    working_dir: /workspaces/rosnfr
+    volumes:
+      - .:/workspaces/rosnfr
+    network_mode: host
+    privileged: true
+  ros2_build:
+    image: ghcr.io/northernforce/pifiles:main
+    command: colcon build
+    working_dir: /workspaces/rosnfr
+    volumes:
+      - .:/workspaces/rosnfr
+    network_mode: host
+    privileged: true
   ros2_test:
     image: ghcr.io/northernforce/pifiles:main
     command: ros2 launch nfr_crescendo sim.launch.py
