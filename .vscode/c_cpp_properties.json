@@ -6,7 +6,7 @@
                 "limitSymbolsToIncludedHeaders": false
             },
             "includePath": [
-                "/opt/ros/rolling/include/**",
+                "/opt/ros/iron/include/**",
                 "/workspaces/rosnfr/src/nfr_ros/nfr_camera/include/**",
                 "/workspaces/rosnfr/src/nfr_ros/nfr_msgs/include/**",
                 "/workspaces/rosnfr/src/nfr_ros/nfr_note_detector/include/**",

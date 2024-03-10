@@ -10,7 +10,7 @@ services:
       - /tmp/.X11-unix:/tmp/.X11-unix
       - ~/.Xauthority:/root/.Xauthority
     network_mode: host
-    # privileged: true
+      #    privileged: true
     environment:
       DISPLAY: $DISPLAY
   ros2_swervy:
@@ -36,7 +36,7 @@ services:
     volumes:
       - .:/workspaces/rosnfr
     network_mode: host
-    privileged: true
+    #privileged: true
   ros2_test:
     image: ghcr.io/northernforce/pifiles:main
     command: ros2 launch nfr_crescendo sim.launch.py
@@ -44,13 +44,13 @@ services:
     volumes:
       - .:/workspaces/rosnfr
     privileged: true
-    # networks:
-    #   network:
-    #     ipv4_address: 10.1.72.20
-# networks:
-#   network:
-#     driver: bridge
-#     ipam:
-#       config:
-#         - subnet: 10.1.72.0/16
-#           gateway: 10.1.72.2
+    networks:
+      network:
+        ipv4_address: 10.1.72.20
+networks:
+  network:
+    driver: bridge
+    ipam:
+      config:
+        - subnet: 10.1.72.0/16
+          gateway: 10.1.72.2
