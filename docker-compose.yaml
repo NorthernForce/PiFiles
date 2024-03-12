@@ -43,14 +43,14 @@ services:
     working_dir: /workspaces/rosnfr
     volumes:
       - .:/workspaces/rosnfr
-    privileged: true
-    networks:
-      network:
-        ipv4_address: 10.1.72.20
-networks:
-  network:
-    driver: bridge
-    ipam:
-      config:
-        - subnet: 10.1.72.0/24
-          gateway: 10.1.72.2
+#     privileged: true
+#     networks:
+#       network:
+#         ipv4_address: 10.1.72.20
+# networks:
+#   network:
+#     driver: bridge
+#     ipam:
+#       config:
+#         - subnet: 10.1.72.0/24
+#           gateway: 10.1.72.2
