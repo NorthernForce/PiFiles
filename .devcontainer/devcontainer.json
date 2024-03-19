@@ -36,11 +36,8 @@
 	// Configure tool-specific properties.
 	"customizations": {
 		"vscode": {
-			"extensions": [
-				"ms-iot.vscode-ros"
-			],
 			"settings": {
-				"remote.autoForwardPorts": false
+				"remote.autoForwardPorts": true
 			}
 		}
 	},
